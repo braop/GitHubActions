@@ -92,24 +92,32 @@ To use GitHub Actions to publish an app to the Google Play Store, you need to cr
 The first step is to build the app and make sure it is ready for release. You can use a GitHub Actions workflow to build the app and run any necessary tests to ensure it is working correctly.
 
 ```
-name: Build Action
+name: Build and Test App
+
 on:
   push:
-    branches: 
-      - '*'
+    branches:
+      - master
+
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 1.8
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
-    - name: Build with Gradle
+        java-version: 11
+
+    - name: Build the app
       run: ./gradlew build
+
+    - name: Test the app
+      run: ./gradlew test
+
 ```
       
 #### Step Two
