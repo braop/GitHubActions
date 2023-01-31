@@ -119,6 +119,12 @@ jobs:
       run: ./gradlew test
 
 ```
+#### Explanation of the workflow
+The above workflow will run whenever a change is pushed to the master branch of the repository and it will perform the following steps:
+1. Check out the code: The first step is to check out the code from your repository using the actions/checkout action.
+2. Set up JDK: The next step is to set up the Java Development Kit (JDK) using the actions/setup-java action. In this example, the JDK version is set to 11. 
+3. Build the app: The next step is to build the app using the Gradle build system. You can run the gradlew build command to build the app. 
+4. Test the app: Finally, the app is tested using the Gradle test command. This step will run any tests that are included in your app and ensure that everything is working correctly.
       
 #### Step Two
 2. Sign the app: 
