@@ -167,7 +167,7 @@ runs-on: ubuntu-latest
         ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
         ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 ```
-In this example, the workflow is triggered whenever code is pushed to the main branch of the repository. The workflow sets up the Java Development Kit (JDK) and Android SDK, and then uses the ./gradlew signingReport command to sign the app using the specified keystore file, password, and key alias.
+The above workflow is triggered whenever code is pushed to the master branch of the repository. The workflow sets up the Java Development Kit (JDK) and Android SDK, and then uses the ./gradlew signingReport command to sign the app using the specified keystore file, password, and key alias.
 
 Note that the keystore file, password, and key alias are stored as secrets in the GitHub repository and referenced in the YAML code using environment variables. This allows you to securely store sensitive information and use it in your workflows without exposing it in your code.
 
