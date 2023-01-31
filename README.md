@@ -22,7 +22,7 @@ GitHub Actions provides a convenient way to automate common development tasks, s
 ##  Example of YAML file.
 
 ```
-name: GitHub Actions Demo
+name: Github Action Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
@@ -42,5 +42,15 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
    ```
    
-   
+### Definitions
+- github.actor: retuns username of github account
+- github.event_name: 
+- runner.os: 
+- github.ref:
+- github.repository: 
+- github.workspace: 
+- job.status: 
+
+
+
    
