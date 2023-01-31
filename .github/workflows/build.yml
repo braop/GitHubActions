@@ -3,7 +3,7 @@ name: Build and Test App
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   build:
