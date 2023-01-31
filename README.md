@@ -1,4 +1,7 @@
-# Repository Illustrating GitHub Actions
+# GitHub Actions
+Thi is a tool within GitHub that allows you to automate software development workflows. It enables you to create custom workflows triggered by events such as pushing code to a repository, opening a pull request, or creating an issue.
+
+These workflows consist of a series of actions, such as building and testing code, deploying to a server, or publishing a package to a package manager.
 
 
 ##  Building and publishing packages.
