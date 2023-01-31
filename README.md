@@ -91,7 +91,7 @@ To use GitHub Actions to publish an app to the Google Play Store, you need to cr
 1. Build the app:
 The first step is to build the app and make sure it is ready for release. You can use a GitHub Actions workflow to build the app and run any necessary tests to ensure it is working correctly.
 
-### Step Two
+#### Step Two
 2. Sign the app: 
 Before you can publish an app to the Google Play Store, you need to sign it with a unique key. You can use the GitHub Actions workflow to sign the app using the Android Signing Plugin.
 
