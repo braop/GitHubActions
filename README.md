@@ -43,13 +43,26 @@ jobs:
    ```
    
 ### Definitions
-- github.actor: retuns username of github account
-- github.event_name: 
-- runner.os: 
-- github.ref:
-- github.repository: 
-- github.workspace: 
-- job.status: 
+- ${{ github.actor }}: 
+Retuns username of github account
+
+- ${{ github.event_name }}:
+Returns the event name eg push, pull request etc
+
+- ${{ runner.os }}:
+Returns operating system on which the server is running
+
+- ${{ github.ref }}:
+Returns reference of branch eg refs/heads/master
+
+- ${{ github.repository }}:
+Returns github repository name
+
+- ls ${{ github.workspace }}:
+Lists the files in the workspace
+
+- ${{ job.status }}:
+Show status of the job eg success ot failed
 
 
 ## GitHub Actions key components
