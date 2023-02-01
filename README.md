@@ -129,47 +129,6 @@ The above workflow will run whenever a change is pushed to the master branch of 
 2. Sign the app: 
 Before you can publish an app to the Google Play Store, you need to sign it with a unique key. You can use the GitHub Actions workflow to sign the app using the Android Signing Plugin.
 
-```
-name: Sign Android App
-
-on:
-push:
-branches:
-- master
-
-env:
-ANDROID_SDK_ROOT: /usr/local/android-sdk
-
-jobs:
-sign:
-runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Set up Android SDK
-      uses: actions/setup-android@v1
-      with:
-        android-sdk-version: 29
-        architecture: x86_64
-
-    - name: Sign the app
-      run: ./gradlew signingReport
-      env:
-        ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-        ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-        ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-        ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-```
-The above workflow is triggered whenever code is pushed to the master branch of the repository. The workflow sets up the Java Development Kit (JDK) and Android SDK, and then uses the ./gradlew signingReport command to sign the app using the specified keystore file, password, and key alias.
-
-Note that the keystore file, password, and key alias are stored as secrets in the GitHub repository and referenced in the YAML code using environment variables. This allows you to securely store sensitive information and use it in your workflows without exposing it in your code.
 
 #### Step Three
 3. Upload the app: 
