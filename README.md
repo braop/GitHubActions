@@ -124,44 +124,6 @@ jobs:
 2. Sign the app: 
 Before you can publish an app to the Google Play Store, you need to sign it with a unique key. You can use the GitHub Actions workflow to sign the app using the Android Signing Plugin.
 
-```
-name: Sign Android App
-
-on:
-  push:
-    branches:
-      - dev
-
-env:
-  ANDROID_SDK_ROOT: /usr/local/android-sdk
-
-jobs:
-  sign:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Set up Android SDK
-        uses: actions/checkout@v2
-        with:
-          android-sdk-version: 29
-          architecture: x86_64
-
-      - name: Sign the app
-        run: ./gradlew signingReport
-        env:
-          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-  ```
 
 #### Step Three
 3. Upload the app: 
