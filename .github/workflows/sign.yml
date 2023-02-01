@@ -22,7 +22,7 @@ jobs:
           java-version: 11
 
       - name: Set up Android SDK
-        uses: actions/setup-android@v2
+        uses: actions/setup-android@v1
         with:
           android-sdk-version: 29
           architecture: x86_64
