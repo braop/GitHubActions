@@ -3,7 +3,7 @@ name: Upload to Google Play Store
 on:
   push:
     branches:
-      - main
+      - dev
 
 env:
   GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
