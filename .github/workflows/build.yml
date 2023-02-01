@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew test
 
       - name: Set up Android SDK
-        uses: actions/actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           android-sdk-version: 29
           architecture: x86_64
