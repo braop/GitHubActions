@@ -175,6 +175,53 @@ Note that the keystore file, password, and key alias are stored as secrets in th
 3. Upload the app: 
 Once the app is signed, you can use the GitHub Actions workflow to upload it to the Google Play Store. You can use the Google Play Developer API to upload the app and publish it to the store.
 
+##### option one: Using GitHub Actions workflow
+
+```
+name: Upload to Google Play Store
+
+on:
+push:
+branches:
+- main
+
+env:
+GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
+
+jobs:
+upload:
+runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Set up Android SDK
+      uses: actions/setup-android@v2
+      with:
+        android-sdk-tools: 29.0.3
+
+    - name: Decode Google Play JSON
+      id: decode-google-play-json
+      run: echo ${{ env.GOOGLE_PLAY_JSON }} | base64 --decode > ${{ env.HOME }}/google-play.json
+
+    - name: Authenticate with Google Play
+      uses: fastlane/action-google-play-authenticate@v1
+      with:
+        json-key: ${{ env.HOME }}/google-play.json
+
+    - name: Upload to Google Play
+      uses: fastlane/action-upload-to-google-play@v2
+      with:
+        track: internal
+        apk-file: app/build/outputs/apk/release/app-release.apk
+```
+
 #### Step Four
 4. Build the app:
 Monitor the release: After the app is published, you can use GitHub Actions to monitor the release and ensure that it was successful. You can use the Google Play Developer API to check the status of the release and receive notifications when it is complete.
