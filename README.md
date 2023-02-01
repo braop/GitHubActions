@@ -175,7 +175,7 @@ Note that the keystore file, password, and key alias are stored as secrets in th
 3. Upload the app: 
 Once the app is signed, you can use the GitHub Actions workflow to upload it to the Google Play Store. You can use the Google Play Developer API to upload the app and publish it to the store.
 
-##### option one: Using GitHub Actions workflow
+##### Using GitHub Actions workflow
 
 ```
 name: Upload to Google Play Store
@@ -221,6 +221,9 @@ runs-on: ubuntu-latest
         track: internal
         apk-file: app/build/outputs/apk/release/app-release.apk
 ```
+
+##### Using Google Play Developer API
+
 
 #### Step Four
 4. Build the app:
