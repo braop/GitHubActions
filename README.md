@@ -276,6 +276,16 @@ runs-on: ubuntu-latest
         apk-file: app/build/outputs/apk/release/app-release.apk
 ```
 
+###### Create a secret in your repository
+In GitHub, you can create a secret in your repository by following these steps:
+
+1. Go to the repository you want to create a secret in. 
+2. Click on the "Settings" tab. 
+3. In the left navigation panel, click on "Secrets."
+4. Click on the "New repository secret" button. 
+5. Enter a name for the secret and its value. 
+6. Click on the "Add secret" button.
+
 ##### Using Google Play Developer API
 
 #### Step Four
