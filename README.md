@@ -235,16 +235,16 @@ sensitive information and use it in your workflows without exposing it in your c
 name: Upload to Google Play Store
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - dev
 
 env:
-GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
+  GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
 
 jobs:
-upload:
-runs-on: ubuntu-latest
+  upload:
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -277,16 +277,63 @@ runs-on: ubuntu-latest
 ```
 
 ###### Create a secret in your repository
+
 In GitHub, you can create a secret in your repository by following these steps:
 
-1. Go to the repository you want to create a secret in. 
-2. Click on the "Settings" tab. 
+1. Go to the repository you want to create a secret in.
+2. Click on the "Settings" tab.
 3. In the left navigation panel, click on "Secrets."
-4. Click on the "New repository secret" button. 
-5. Enter a name for the secret and its value. 
+4. Click on the "New repository secret" button.
+5. Enter a name for the secret and its value.
 6. Click on the "Add secret" button.
 
 ##### Using Google Play Developer API
+
+```
+name: Upload to Google Play Store
+
+on:
+push:
+branches:
+
+- main
+
+env:
+GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
+
+jobs:
+upload:
+runs-on: ubuntu-latest
+
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Set up Android SDK
+      uses: actions/setup-android@v2
+      with:
+        android-sdk-tools: 29.0.3
+
+    - name: Decode Google Play JSON
+      id: decode-google-play-json
+      run: echo ${{ env.GOOGLE_PLAY_JSON }} | base64 --decode > ${{ env.HOME }}/google-play.json
+
+    - name: Authenticate with Google API
+      uses: google-auth/setup-gcloud@v1
+      with:
+        service_account_key: ${{ env.HOME }}/google-play.json
+
+    - name: Upload to Google Play
+      uses: google/cloud-sdk@v1.0.0
+      with:
+        args: app deploy ${{ env.HOME }}/google-play.json app/build/outputs/apk/release/app-release.apk
+```
 
 #### Step Four
 
