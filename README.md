@@ -276,6 +276,27 @@ jobs:
         apk-file: app/build/outputs/apk/release/app-release.apk
 ```
 
+
+The google-play.json file is a JSON-formatted file that contains the credentials for the Google Play Developer API. To obtain this file, you'll need to follow these steps:
+
+    Go to the Google Play Developer Console: https://play.google.com/apps/publish/
+
+    Click on the Gear icon in the top right corner and select Developer account.
+
+    Select the app you want to use with the Google Play Developer API.
+
+    Go to Settings > API access.
+
+    Click on the Create service account button.
+
+    Fill in the required information and click on the Create button.
+
+    Download the google-play.json file.
+
+    Store the google-play.json file in your GitHub repository and make sure it is stored securely as a secret.
+
+Note: You'll need to have the necessary permissions to access the Google Play Developer Console and create a service account for the Google Play Developer API.
+
 ###### Create a secret in your repository
 
 In GitHub, you can create a secret in your repository by following these steps:
