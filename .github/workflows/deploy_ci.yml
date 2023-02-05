@@ -2,25 +2,25 @@ name: Deploy App CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #    env:
+    #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: set up JDK 1.8
+      - name: set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
 
       - name: Grant rights
         run: chmod +x build.gradle
@@ -57,9 +57,9 @@ jobs:
           track: beta
           whatsNewDirectory: whatsnew/
 
-      - name: Notify on Slack
-        uses: act10ns/slack@v1
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-        if: always()
+#      - name: Notify on Slack
+#        uses: act10ns/slack@v1
+#        with:
+#          status: ${{ job.status }}
+#          steps: ${{ toJson(steps) }}
+#        if: always()
