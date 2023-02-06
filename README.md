@@ -363,3 +363,109 @@ runs-on: ubuntu-latest
    release and ensure that it was successful. You can use the Google Play Developer API to check the
    status of the release and receive notifications when it is complete.
 
+
+### GithubAction Repository
+Two workflows are used to manage this projects:
+
+    Continous Integration: On_Push_CI.yml — When pushed in any branch except master, it Build with Gradle and tests.
+    Continous eployment: Deploy_CI.yml — When pushed to master or any pull request is merged to master, it deploys the app.
+
+### On_Push_CI.yml
+```name: Continous Integration
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    #    env:
+    #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Grant rights
+        run: chmod +x build.gradle
+
+      - name: Build with Gradle
+        id: build
+        run: ./gradlew build
+
+      - name: Test the app
+        run: ./gradlew test
+
+```
+
+### Deploy_CI.yml
+```
+name: Continous Deployment
+
+on:
+push:
+branches: [ dev ]
+
+jobs:
+build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Grant rights
+        run: chmod +x build.gradle
+
+      - name: Build with Gradle
+        id: build
+        run: ./gradlew build
+
+      - name: Build Release AAB
+        id: buildRelease
+        run: ./gradlew bundleRelease
+
+      - name: Sign AAB
+        id: sign
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Create service_account.json
+        id: createServiceAccount
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Deploy to Play Store (BETA)
+        id: deploy
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: service_account.json
+          packageName: com.package
+          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          track: beta
+#          whatsNewDirectory: whatsnew/
+
+```
+
