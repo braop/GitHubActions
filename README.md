@@ -469,3 +469,14 @@ build:
 
 ```
 
+### Create Secrets
+Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Actions -> New Secret Repository and create the following:
+1. ALIAS: (same as one used while generating the jsk)
+2. KEY_PASSWORD: (same as one used while generating the jsk)
+3. KEY_STORE_PASSWORD: (same as one used while generating the jsk)
+4. SIGNING_KEY: To create this convert the .jsk key (generated from android) to base 64 and paste the string in secrets value.
+5. SERVICE_ACCOUNT_JSON: Open json and copy and paste its in secrets value.
+
+### How to create: SERVICE_ACCOUNT_JSON from google play store
+
+

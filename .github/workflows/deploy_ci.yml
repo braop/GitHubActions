@@ -2,15 +2,12 @@ name: Continous Deployment
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    #    env:
-    #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
 
