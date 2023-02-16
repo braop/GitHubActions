@@ -1,4 +1,4 @@
-## Using Github Actions to Publish to Google Play Store.
+## Using Github Actions to Publish ANDROID APP BUNDLE (AAB) to Google Play Store.
 
 To use GitHub Actions to publish an app to the Google Play Store, you need to create a workflow that
 performs the following steps:
@@ -57,67 +57,25 @@ Note: Create secrets for:
 ![creating_secrets](https://user-images.githubusercontent.com/25560375/219316734-68e3ee2c-9e16-48b2-929a-6fab9ec81b8c.png)
 
 
-##### Using Google Play Developer API
+#### Creating service account.
 
-```
-name: Upload to Google Play Store
+1. Go to google cloud console (https://console.cloud.google.com).
+2. Using google menu navi gate to IAM and Admin
+3. Naviagte to service Account
+4. Create searvice account
+5. Enter service details
+6. After entering service account name coppy email address undeneath service account ID
+7. You may enter service account description(optional)
+8. Click create and countine
+9. Dont skip role even though it optional
+10. Select: Role as Owner.
+11. press countinue
+12. Grant user accesss
+13. paste email to service account user role and service account admins role and cline done.
+14. Manage key and add key to create key select json and a it will be downloaded.
+15. Go back to google cloud menu and click on Api servies, enable api
+16. Search for Google Play Android Developer API and enable it.
 
-on:
-push:
-branches:
-
-- main
-
-env:
-GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
-
-jobs:
-upload:
-runs-on: ubuntu-latest
-
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Set up Android SDK
-      uses: actions/setup-android@v2
-      with:
-        android-sdk-tools: 29.0.3
-
-    - name: Decode Google Play JSON
-      id: decode-google-play-json
-      run: echo ${{ env.GOOGLE_PLAY_JSON }} | base64 --decode > ${{ env.HOME }}/google-play.json
-
-    - name: Authenticate with Google API
-      uses: google-auth/setup-gcloud@v1
-      with:
-        service_account_key: ${{ env.HOME }}/google-play.json
-
-    - name: Upload to Google Play
-      uses: google/cloud-sdk@v1.0.0
-      with:
-        args: app deploy ${{ env.HOME }}/google-play.json app/build/outputs/apk/release/app-release.apk
-```
-
-#### Step Four
-
-4. Build the app:
-   Monitor the release: After the app is published, you can use GitHub Actions to monitor the
-   release and ensure that it was successful. You can use the Google Play Developer API to check the
-   status of the release and receive notifications when it is complete.
-
-
-### GithubAction Repository
-Two workflows are used to manage this projects:
-
-    Continous Integration: On_Push_CI.yml — When pushed in any branch except master, it Build with Gradle and tests.
-    Continous eployment: Deploy_CI.yml — When pushed to master or any pull request is merged to master, it deploys the app.
 
 ### On_Push_CI.yml
 ```name: Continous Integration
