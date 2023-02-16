@@ -235,6 +235,8 @@ jobs:
 ```
 
 ### Workflow Monitoring
+Go to repository and click on actions on the menu.
 
+![monitor_workflow](https://user-images.githubusercontent.com/25560375/219348214-f12ca81f-51e3-4701-974f-cfdb5ea2c4b7.png)
 
 
