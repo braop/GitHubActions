@@ -37,14 +37,25 @@ Before automating this process, App must be in production on google play, meanin
 
 #### Github Repo Setup :: Create Secrets
 
-In GitHub, you can create a secret in your repository by following these steps:
+In GitHub, you can create a secrets in your repository by following these steps:
 
 1. Go to the repository you want to create a secret in.
 2. Click on the "Settings" tab.
-3. In the left navigation panel, click on "Secrets."
-4. Click on the "New repository secret" button.
-5. Enter a name for the secret and its value.
-6. Click on the "Add secret" button.
+3. In the left navigation panel, click on "Secrets and Variables."
+4. Click on Actions option.
+5. Click on the "New repository secret" button.
+6. Enter a name for the secret and its value.
+7. Click on the "Add secret" button.
+
+Note: Create secrets for:
+1. KEY_STORE_PASSWOR => Paste key store password used while creating sign in key(key.jsk)
+2. KEY_PASSWORD  => Paste key password used while creating sign in key(key.jsk)
+3. ALIAS =>  Paste alias used while creating sign in key(key.jsk)
+4. SIGNING_KEY => Paste base64 string: Use this link(https://8gwifi.org/Base64Functions.jsp) and convert file to base64
+5. SERVICE_ACCOUNT_JSON => Paste content of service json file
+
+![creating_secrets](https://user-images.githubusercontent.com/25560375/219316734-68e3ee2c-9e16-48b2-929a-6fab9ec81b8c.png)
+
 
 ##### Using Google Play Developer API
 
