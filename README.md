@@ -60,21 +60,26 @@ Note: Create secrets for:
 #### Creating service account.
 
 1. Go to google cloud console (https://console.cloud.google.com).
-2. Using google menu navi gate to IAM and Admin
-3. Naviagte to service Account
-4. Create searvice account
-5. Enter service details
-6. After entering service account name coppy email address undeneath service account ID
-7. You may enter service account description(optional)
-8. Click create and countine
-9. Dont skip role even though it optional
-10. Select: Role as Owner.
-11. press countinue
-12. Grant user accesss
-13. paste email to service account user role and service account admins role and cline done.
-14. Manage key and add key to create key select json and a it will be downloaded.
-15. Go back to google cloud menu and click on Api servies, enable api
-16. Search for Google Play Android Developer API and enable it.
+2. Using google menu navigate to IAM and Admin
+
+![menu_google_cloud](https://user-images.githubusercontent.com/25560375/219331800-2346575b-ad83-4be9-83fd-0be937e09b02.png)
+
+4. Naviagte to service Account
+
+
+6. Create searvice account
+7. Enter service details
+8. After entering service account name coppy email address undeneath service account ID
+9. You may enter service account description(optional)
+10. Click create and countine
+11. Dont skip role even though it optional
+12. Select: Role as Owner.
+13. press countinue
+14. Grant user accesss
+15. paste email to service account user role and service account admins role and cline done.
+16. Manage key and add key to create key select json and a it will be downloaded.
+17. Go back to google cloud menu and click on Api servies, enable api
+18. Search for Google Play Android Developer API and enable it.
 
 
 ### On_Push_CI.yml
