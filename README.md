@@ -1,123 +1,4 @@
-# GitHub Actions
-
-Thi is a tool within GitHub that allows you to automate software development workflows. It enables
-you to create custom workflows triggered by events such as pushing code to a repository, opening a
-pull request, or creating an issue.
-
-These workflows consist of a series of actions, such as building and testing code, deploying to a
-server, or publishing a package to a package manager.
-
-GitHub Actions provides a convenient way to automate common development tasks, streamline your CI/CD
-pipeline, and improve collaboration among team members.
-
-## Using GitHub Actions involves the following steps:
-
-1. Create a workflow: Workflows are defined in YAML files that are stored in the .github/workflows
-   directory of your GitHub repository. To create a workflow, you need to create a new YAML file in
-   this directory and specify the trigger events and actions that should be taken.
-
-2. Define trigger events: You can define when your workflow should be triggered by specifying events
-   in the YAML file. For example, you can trigger the workflow whenever a code change is pushed to
-   the repository, when a pull request is opened, or when an issue is created.
-
-3. Define actions: Actions are the individual tasks that make up your workflow. Each action is
-   defined in a block of YAML code and can include a variety of tasks, such as building and testing
-   code, deploying code to a server, or publishing a package to a package manager. Actions can be
-   written in JavaScript or any other language that can be run on Linux, Windows, or macOS.
-
-4. Run the workflow: After you've defined your trigger events and actions, you can run your workflow
-   by committing the changes to your GitHub repository. GitHub Actions will automatically run the
-   workflow whenever the specified trigger events occur.
-
-5. Monitor the workflow: You can monitor the progress of your workflow from the Actions tab of your
-   GitHub repository. You can view the status of each step in the workflow, including whether it
-   succeeded or failed, and you can view detailed logs for each action.
-
-## Example of YAML file.
-
-```
-name: Github Action Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-   ```
-
-### Definitions
-
-- ${{ github.actor }}:
-  Retuns username of github account
-
-- ${{ github.event_name }}:
-  Returns the event name eg push, pull request etc
-
-- ${{ runner.os }}:
-  Returns operating system on which the server is running
-
-- ${{ github.ref }}:
-  Returns reference of branch eg refs/heads/master
-
-- ${{ github.repository }}:
-  Returns github repository name
-
-- ls ${{ github.workspace }}:
-  Lists the files in the workspace
-
-- ${{ job.status }}:
-  Show status of the job eg success ot failed
-
-## GitHub Actions key components
-
-### Workflows:
-
-These are the main component of GitHub Actions and are defined in YAML files stored in the
-.github/workflows directory of your GitHub repository. Workflows specify the trigger events and
-actions that should be taken in response to those events.
-
-### Actions:
-
-These are the individual tasks that make up a workflow. Each action is defined in a block of YAML
-code and can include a variety of tasks, such as building and testing code, deploying code to a
-server, or publishing a package to a package manager.
-
-### Trigger events:
-
-Trigger events are the events that cause a workflow to run, such as pushing code to a repository,
-opening a pull request, or creating an issue. You can specify the trigger events in the YAML file
-for your workflow.
-
-### Runner:
-
-This is the component that actually executes the actions in a workflow. GitHub Actions supports
-runners for Linux, Windows, and macOS, so you can write actions in a variety of programming
-languages and run them on the appropriate platform.
-
-### Environment variables:
-
-These are used to store information that can be used by actions within a workflow. You can use
-environment variables to pass information between actions, store configuration settings, or set up
-secrets.
-
-### Artifacts:
-
-These are files or data that are generated by a workflow and can be used by other workflows or jobs.
-Artifacts are stored on the GitHub servers and can be downloaded for use in other parts of your
-development process.
-
-## Using Github Actions to publish to Google Play Store
+## How to use Github Actions to publish AAB to Google Play Store.
 
 To use GitHub Actions to publish an app to the Google Play Store, you need to create a workflow that
 performs the following steps:
@@ -128,47 +9,6 @@ performs the following steps:
    The first step is to build the app and make sure it is ready for release. You can use a GitHub
    Actions workflow to build the app and run any necessary tests to ensure it is working correctly.
 
-```
-name: Build and Test App
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Build the app
-      run: ./gradlew build
-
-    - name: Test the app
-      run: ./gradlew test
-```
-
-#### Explanation of the workflow
-
-The above workflow will run whenever a change is pushed to the master branch of the repository and
-it will perform the following steps:
-
-1. Check out the code: The first step is to check out the code from your repository using the
-   actions/checkout action.
-2. Set up JDK: The next step is to set up the Java Development Kit (JDK) using the
-   actions/setup-java action. In this example, the JDK version is set to 11.
-3. Build the app: The next step is to build the app using the Gradle build system. You can run the
-   gradlew build command to build the app.
-4. Test the app: Finally, the app is tested using the Gradle test command. This step will run any
-   tests that are included in your app and ensure that everything is working correctly.
 
 #### Step Two
 
@@ -176,52 +16,6 @@ it will perform the following steps:
    Before you can publish an app to the Google Play Store, you need to sign it with a unique key.
    You can use the GitHub Actions workflow to sign the app using the Android Signing Plugin.
 
-```
-name: Sign Android App
-
-on:
-push:
-branches:
-- master
-
-env:
-ANDROID_SDK_ROOT: /usr/local/android-sdk
-
-jobs:
-sign:
-runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Set up Android SDK
-      uses: actions/setup-android@v1
-      with:
-        android-sdk-version: 29
-        architecture: x86_64
-
-    - name: Sign the app
-      run: ./gradlew signingReport
-      env:
-        ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-        ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-        ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-        ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-```
-
-The above workflow is triggered whenever code is pushed to the master branch of the repository. The
-workflow sets up the Java Development Kit (JDK) and Android SDK, and then uses the ./gradlew
-signingReport command to sign the app using the specified keystore file, password, and key alias.
-
-Note that the keystore file, password, and key alias are stored as secrets in the GitHub repository
-and referenced in the YAML code using environment variables. This allows you to securely store
-sensitive information and use it in your workflows without exposing it in your code.
 
 #### Step Three
 
@@ -229,149 +23,127 @@ sensitive information and use it in your workflows without exposing it in your c
    Once the app is signed, you can use the GitHub Actions workflow to upload it to the Google Play
    Store. You can use the Google Play Developer API to upload the app and publish it to the store.
 
-##### Using GitHub Actions workflow
+-----
 
-```
-name: Upload to Google Play Store
+In this sample project we use two workflows: one that build the and test the app whenever commits are pushed to any branc rather than master and one that uploads app to google play whenever commits are pushed or merged to master branch.
 
-on:
-  push:
-    branches:
-      - dev
+### Note
+Before automating this process, App must be in production on google play, meaning the first publish to google play is done manually via the google play console.
 
-env:
-  GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
+-----
 
-jobs:
-  upload:
-    runs-on: ubuntu-latest
+### Requirements
+1. Key.jsk: Created while signing app via android studio
+2. Key password: Created while signing app via android studio
+3. Key store password: Created while signing app via android studio
+4. Alias: Created while signing app via android studio
+5. service account json: Contains the credentials for the Google Play Developer API
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+#### Github Repo Setup :: Create Secrets
 
-    - name: Set up Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Set up Android SDK
-      uses: actions/setup-android@v2
-      with:
-        android-sdk-tools: 29.0.3
-
-    - name: Decode Google Play JSON
-      id: decode-google-play-json
-      run: echo ${{ env.GOOGLE_PLAY_JSON }} | base64 --decode > ${{ env.HOME }}/google-play.json
-
-    - name: Authenticate with Google Play
-      uses: fastlane/action-google-play-authenticate@v1
-      with:
-        json-key: ${{ env.HOME }}/google-play.json
-
-    - name: Upload to Google Play
-      uses: fastlane/action-upload-to-google-play@v2
-      with:
-        track: internal
-        apk-file: app/build/outputs/apk/release/app-release.apk
-```
-
-
-The google-play.json file is a JSON-formatted file that contains the credentials for the Google Play Developer API. To obtain this file, you'll need to follow these steps:
-
-    Go to the Google Play Developer Console: https://play.google.com/apps/publish/
-
-    Click on the Gear icon in the top right corner and select Developer account.
-
-    Select the app you want to use with the Google Play Developer API.
-
-    Go to Settings > API access.
-
-    Click on the Create service account button.
-
-    Fill in the required information and click on the Create button.
-
-    Download the google-play.json file.
-
-    Store the google-play.json file in your GitHub repository and make sure it is stored securely as a secret.
-
-Note: You'll need to have the necessary permissions to access the Google Play Developer Console and create a service account for the Google Play Developer API.
-
-###### Create a secret in your repository
-
-In GitHub, you can create a secret in your repository by following these steps:
+In GitHub, you can create a secrets in your repository by following these steps:
 
 1. Go to the repository you want to create a secret in.
 2. Click on the "Settings" tab.
-3. In the left navigation panel, click on "Secrets."
-4. Click on the "New repository secret" button.
-5. Enter a name for the secret and its value.
-6. Click on the "Add secret" button.
+3. In the left navigation panel, click on "Secrets and Variables."
+4. Click on Actions option.
+5. Click on the "New repository secret" button.
+6. Enter a name for the secret and its value.
+7. Click on the "Add secret" button.
 
-##### Using Google Play Developer API
 
+### Create Secrets
+Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Actions -> New Secret Repository and create the following:
+1. ALIAS: (same as one used while generating the jsk)
+2. KEY_PASSWORD: (same as one used while generating the jsk)
+3. KEY_STORE_PASSWORD: (same as one used while generating the jsk)
+4. SIGNING_KEY: To create this convert the .jsk key (generated from android) to base64(Use this link(https://8gwifi.org/Base64Functions.jsp)) and paste the string in secrets value.
+5. SERVICE_ACCOUNT_JSON: Open json and copy and paste its in secrets value.
+
+![creating_secrets](https://user-images.githubusercontent.com/25560375/219327104-b202f012-ec3d-4da5-83ac-6059655c3f30.png)
+
+-----
+
+#### Creating service account.
+
+1. Go to google cloud console (https://console.cloud.google.com).
+2. Using google menu navigate to IAM and Admin
+
+![menu_google_cloud](https://user-images.githubusercontent.com/25560375/219331800-2346575b-ad83-4be9-83fd-0be937e09b02.png)
+
+4. Select project or create project
+
+![create_project](https://user-images.githubusercontent.com/25560375/219334773-a07a529f-3f48-4755-a188-7672551b447c.png)
+
+6. Naviagte to service Account
+
+![service_account](https://user-images.githubusercontent.com/25560375/219335313-0ac811c0-c136-45bb-b81c-d6b67fc9cc39.png)
+
+6. Create searvice account
+7. Enter service details
+8. After entering service account name coppy email address undeneath service account ID
+
+![service](https://user-images.githubusercontent.com/25560375/219336404-c98d3692-6897-488e-91fe-d0e4640effdd.png)
+
+10. You may enter service account description(optional)
+11. Click create and continue
+12. Dont skip role even though it optional
+13. Select: Role as Owner.
+
+![role_owner](https://user-images.githubusercontent.com/25560375/219337058-71aad30d-ff4f-4d91-bb35-136388592908.png)
+
+15. Press continue
+16. Grant user accesss
+17. Paste email to service account user role and service account admins role and click done.
+
+![paste_email](https://user-images.githubusercontent.com/25560375/219339688-ce2cbb95-e054-49d9-a490-e502edd03d8f.png)
+
+19. Manage key and add key to create key select json and a it will be downloaded.
+
+![manage_key](https://user-images.githubusercontent.com/25560375/219338742-0b065921-20d7-47aa-b340-5115dc4b9ea3.png)
+
+20. Add key -> create new key -> slecte json and service json file will be downloaded.
+
+![create_project](https://user-images.githubusercontent.com/25560375/219341742-1b833939-d02d-4fda-a8c7-5c9cd5024203.png)
+
+21. Go back to google cloud menu and click on Api servies, enable api
+
+![api_enable](https://user-images.githubusercontent.com/25560375/219340842-684ec46b-f336-4f6b-8d12-aea78f2fb0e0.png)
+
+23. Search for Google Play Android Developer API and enable it.
+
+![search_api](https://user-images.githubusercontent.com/25560375/219342325-70865497-2eb3-4228-818c-3bb5ec37a5ca.png)
+![search_results](https://user-images.githubusercontent.com/25560375/219342875-47fc57b3-b058-4891-b53d-c0b0bcb156dc.png)
+
+24. Enable api
+
+![enable_api](https://user-images.githubusercontent.com/25560375/219343316-719e7d1c-1fe1-43c2-9740-92047806ea14.png)
+
+-----
+
+25. Got to google play console - > Setup - Api acess
+
+- Link existing google cloud project
+- Select from drop down and save
+
+![link_api](https://user-images.githubusercontent.com/25560375/219344333-711c1efb-2a19-4068-bc4c-aa636913fbcf.png)
+![project_list](https://user-images.githubusercontent.com/25560375/219344823-ebf6e442-a720-470f-ab81-e28142baaabe.png)
+
+26. Should appear under service account.
+
+![under_service_account](https://user-images.githubusercontent.com/25560375/219345570-699f64be-9b38-44e2-a423-00d82f02d6a6.png)
+
+27. Clear on manager service account and in Account permission add Admin(all permissions) and save changes
+
+28. Under App permissions add apps that u want to be managed.
+
+29. GO to users and permissions -> manage users and add service account id/ email (from google cloud after creating service account name).
+
+
+### build.yml
+For building and testing whenever any commit is pushed to any branch rather than master branch.
 ```
-name: Upload to Google Play Store
-
-on:
-push:
-branches:
-
-- main
-
-env:
-GOOGLE_PLAY_JSON: ${{ secrets.GOOGLE_PLAY_JSON }}
-
-jobs:
-upload:
-runs-on: ubuntu-latest
-
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Set up Android SDK
-      uses: actions/setup-android@v2
-      with:
-        android-sdk-tools: 29.0.3
-
-    - name: Decode Google Play JSON
-      id: decode-google-play-json
-      run: echo ${{ env.GOOGLE_PLAY_JSON }} | base64 --decode > ${{ env.HOME }}/google-play.json
-
-    - name: Authenticate with Google API
-      uses: google-auth/setup-gcloud@v1
-      with:
-        service_account_key: ${{ env.HOME }}/google-play.json
-
-    - name: Upload to Google Play
-      uses: google/cloud-sdk@v1.0.0
-      with:
-        args: app deploy ${{ env.HOME }}/google-play.json app/build/outputs/apk/release/app-release.apk
-```
-
-#### Step Four
-
-4. Build the app:
-   Monitor the release: After the app is published, you can use GitHub Actions to monitor the
-   release and ensure that it was successful. You can use the Google Play Developer API to check the
-   status of the release and receive notifications when it is complete.
-
-
-### GithubAction Repository
-Two workflows are used to manage this projects:
-
-    Continous Integration: On_Push_CI.yml — When pushed in any branch except master, it Build with Gradle and tests.
-    Continous eployment: Deploy_CI.yml — When pushed to master or any pull request is merged to master, it deploys the app.
-
-### On_Push_CI.yml
-```name: Continous Integration
+name: Continous Integration
 
 on:
   push:
@@ -384,21 +156,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    #    env:
-    #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: 'temurin'
 
       - name: Grant rights
-        run: chmod +x build.gradle
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         id: build
@@ -407,33 +177,37 @@ jobs:
       - name: Test the app
         run: ./gradlew test
 
+
 ```
 
-### Deploy_CI.yml
+
+### deploy.yml 
+For plushing app to google play store whenever commits are pushed to master branch
 ```
 name: Continous Deployment
 
 on:
-push:
-branches: [ dev ]
+  push:
+    branches: [ master ]
 
 jobs:
-build:
+  build:
 
     runs-on: ubuntu-latest
 
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: 'temurin'
 
       - name: Grant rights
-        run: chmod +x build.gradle
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         id: build
@@ -457,26 +231,19 @@ build:
         id: createServiceAccount
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
-      - name: Deploy to Play Store (BETA)
+      - name: Deploy to Play Store
         id: deploy
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service_account.json
-          packageName: com.package
+          packageName: io.shopto.pride_handbook
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
-          track: beta
-#          whatsNewDirectory: whatsnew/
-
+          track: production
 ```
 
-### Create Secrets
-Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Actions -> New Secret Repository and create the following:
-1. ALIAS: (same as one used while generating the jsk)
-2. KEY_PASSWORD: (same as one used while generating the jsk)
-3. KEY_STORE_PASSWORD: (same as one used while generating the jsk)
-4. SIGNING_KEY: To create this convert the .jsk key (generated from android) to base 64 and paste the string in secrets value.
-5. SERVICE_ACCOUNT_JSON: Open json and copy and paste its in secrets value.
+### Workflow Monitoring
+Go to repository and click on actions on the menu.
 
-### How to create: SERVICE_ACCOUNT_JSON from google play store
+![monitor_workflow](https://user-images.githubusercontent.com/25560375/219348214-f12ca81f-51e3-4701-974f-cfdb5ea2c4b7.png)
 
 
