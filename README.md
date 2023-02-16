@@ -64,22 +64,39 @@ Note: Create secrets for:
 
 ![menu_google_cloud](https://user-images.githubusercontent.com/25560375/219331800-2346575b-ad83-4be9-83fd-0be937e09b02.png)
 
-4. Naviagte to service Account
+4. Select project or create project
 
+![create_project](https://user-images.githubusercontent.com/25560375/219334773-a07a529f-3f48-4755-a188-7672551b447c.png)
+
+6. Naviagte to service Account
+
+![service_account](https://user-images.githubusercontent.com/25560375/219335313-0ac811c0-c136-45bb-b81c-d6b67fc9cc39.png)
 
 6. Create searvice account
 7. Enter service details
 8. After entering service account name coppy email address undeneath service account ID
-9. You may enter service account description(optional)
-10. Click create and countine
-11. Dont skip role even though it optional
-12. Select: Role as Owner.
-13. press countinue
-14. Grant user accesss
-15. paste email to service account user role and service account admins role and cline done.
-16. Manage key and add key to create key select json and a it will be downloaded.
-17. Go back to google cloud menu and click on Api servies, enable api
-18. Search for Google Play Android Developer API and enable it.
+
+![service](https://user-images.githubusercontent.com/25560375/219336404-c98d3692-6897-488e-91fe-d0e4640effdd.png)
+
+10. You may enter service account description(optional)
+11. Click create and continue
+12. Dont skip role even though it optional
+13. Select: Role as Owner.
+
+![role_owner](https://user-images.githubusercontent.com/25560375/219337058-71aad30d-ff4f-4d91-bb35-136388592908.png)
+
+15. Press continue
+16. Grant user accesss
+17. Paste email to service account user role and service account admins role and click done.
+
+![paste_email](https://user-images.githubusercontent.com/25560375/219339688-ce2cbb95-e054-49d9-a490-e502edd03d8f.png)
+
+19. Manage key and add key to create key select json and a it will be downloaded.
+
+![manage_key](https://user-images.githubusercontent.com/25560375/219338742-0b065921-20d7-47aa-b340-5115dc4b9ea3.png)
+
+21. Go back to google cloud menu and click on Api servies, enable api
+22. Search for Google Play Android Developer API and enable it.
 
 
 ### On_Push_CI.yml
