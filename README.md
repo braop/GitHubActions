@@ -54,7 +54,7 @@ Note: Create secrets for:
 4. SIGNING_KEY => Paste base64 string: Use this link(https://8gwifi.org/Base64Functions.jsp) and convert file to base64
 5. SERVICE_ACCOUNT_JSON => Paste content of service json file
 
-![creating_secrets](https://user-images.githubusercontent.com/25560375/219316734-68e3ee2c-9e16-48b2-929a-6fab9ec81b8c.png)
+![creating_secrets](https://user-images.githubusercontent.com/25560375/219327104-b202f012-ec3d-4da5-83ac-6059655c3f30.png)
 
 
 #### Creating service account.
