@@ -47,12 +47,14 @@ In GitHub, you can create a secrets in your repository by following these steps:
 6. Enter a name for the secret and its value.
 7. Click on the "Add secret" button.
 
-Note: Create secrets for:
-1. KEY_STORE_PASSWOR => Paste key store password used while creating sign in key(key.jsk)
-2. KEY_PASSWORD  => Paste key password used while creating sign in key(key.jsk)
-3. ALIAS =>  Paste alias used while creating sign in key(key.jsk)
-4. SIGNING_KEY => Paste base64 string: Use this link(https://8gwifi.org/Base64Functions.jsp) and convert file to base64
-5. SERVICE_ACCOUNT_JSON => Paste content of service json file
+
+### Create Secrets
+Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Actions -> New Secret Repository and create the following:
+1. ALIAS: (same as one used while generating the jsk)
+2. KEY_PASSWORD: (same as one used while generating the jsk)
+3. KEY_STORE_PASSWORD: (same as one used while generating the jsk)
+4. SIGNING_KEY: To create this convert the .jsk key (generated from android) to base64(Use this link(https://8gwifi.org/Base64Functions.jsp)) and paste the string in secrets value.
+5. SERVICE_ACCOUNT_JSON: Open json and copy and paste its in secrets value.
 
 ![creating_secrets](https://user-images.githubusercontent.com/25560375/219327104-b202f012-ec3d-4da5-83ac-6059655c3f30.png)
 
@@ -95,12 +97,46 @@ Note: Create secrets for:
 
 ![manage_key](https://user-images.githubusercontent.com/25560375/219338742-0b065921-20d7-47aa-b340-5115dc4b9ea3.png)
 
+20. Add key -> create new key -> slecte json and service json file will be downloaded.
+
+![create_project](https://user-images.githubusercontent.com/25560375/219341742-1b833939-d02d-4fda-a8c7-5c9cd5024203.png)
+
 21. Go back to google cloud menu and click on Api servies, enable api
-22. Search for Google Play Android Developer API and enable it.
+
+![api_enable](https://user-images.githubusercontent.com/25560375/219340842-684ec46b-f336-4f6b-8d12-aea78f2fb0e0.png)
+
+23. Search for Google Play Android Developer API and enable it.
+
+![search_api](https://user-images.githubusercontent.com/25560375/219342325-70865497-2eb3-4228-818c-3bb5ec37a5ca.png)
+![search_results](https://user-images.githubusercontent.com/25560375/219342875-47fc57b3-b058-4891-b53d-c0b0bcb156dc.png)
+
+24. Enable api
+
+![enable_api](https://user-images.githubusercontent.com/25560375/219343316-719e7d1c-1fe1-43c2-9740-92047806ea14.png)
+
+25. Got to google play console - > Setup - Api acess
+
+- Link existing google cloud project
+- Select from drop down and save
+
+![link_api](https://user-images.githubusercontent.com/25560375/219344333-711c1efb-2a19-4068-bc4c-aa636913fbcf.png)
+![project_list](https://user-images.githubusercontent.com/25560375/219344823-ebf6e442-a720-470f-ab81-e28142baaabe.png)
+
+26. Should appear under service account.
+
+![under_service_account](https://user-images.githubusercontent.com/25560375/219345570-699f64be-9b38-44e2-a423-00d82f02d6a6.png)
+
+27. Clear on manager service account and in Account permission add Admin(all permissions) and save changes
+
+28. Under App permissions add apps that u want to be managed.
+
+29. GO to users and permissions -> manage users and add service account id/ email (from google cloud after creating service account name).
 
 
-### On_Push_CI.yml
-```name: Continous Integration
+### build.yml
+For building and testing whenever any commit is pushed to any branch rather than master branch.
+```
+name: Continous Integration
 
 on:
   push:
@@ -113,21 +149,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    #    env:
-    #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: 'temurin'
 
       - name: Grant rights
-        run: chmod +x build.gradle
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         id: build
@@ -136,33 +170,37 @@ jobs:
       - name: Test the app
         run: ./gradlew test
 
+
 ```
 
-### Deploy_CI.yml
+
+### deploy.yml 
+For plushing app to google play store whenever commits are pushed to master branch
 ```
 name: Continous Deployment
 
 on:
-push:
-branches: [ dev ]
+  push:
+    branches: [ master ]
 
 jobs:
-build:
+  build:
 
     runs-on: ubuntu-latest
 
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: 'temurin'
 
       - name: Grant rights
-        run: chmod +x build.gradle
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         id: build
@@ -186,26 +224,17 @@ build:
         id: createServiceAccount
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
-      - name: Deploy to Play Store (BETA)
+      - name: Deploy to Play Store
         id: deploy
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service_account.json
-          packageName: com.package
+          packageName: io.shopto.pride_handbook
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
-          track: beta
-#          whatsNewDirectory: whatsnew/
-
+          track: production
 ```
 
-### Create Secrets
-Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Actions -> New Secret Repository and create the following:
-1. ALIAS: (same as one used while generating the jsk)
-2. KEY_PASSWORD: (same as one used while generating the jsk)
-3. KEY_STORE_PASSWORD: (same as one used while generating the jsk)
-4. SIGNING_KEY: To create this convert the .jsk key (generated from android) to base 64 and paste the string in secrets value.
-5. SERVICE_ACCOUNT_JSON: Open json and copy and paste its in secrets value.
+### Workflow Monitoring
 
-### How to create: SERVICE_ACCOUNT_JSON from google play store
 
 
