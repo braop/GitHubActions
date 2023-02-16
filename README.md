@@ -1,4 +1,4 @@
-## Using Github Actions to Publish ANDROID APP BUNDLE (AAB) to Google Play Store.
+## How to use Github Actions to publish AAB to Google Play Store.
 
 To use GitHub Actions to publish an app to the Google Play Store, you need to create a workflow that
 performs the following steps:
@@ -23,10 +23,14 @@ performs the following steps:
    Once the app is signed, you can use the GitHub Actions workflow to upload it to the Google Play
    Store. You can use the Google Play Developer API to upload the app and publish it to the store.
 
+-----
+
 In this sample project we use two workflows: one that build the and test the app whenever commits are pushed to any branc rather than master and one that uploads app to google play whenever commits are pushed or merged to master branch.
 
 ### Note
 Before automating this process, App must be in production on google play, meaning the first publish to google play is done manually via the google play console.
+
+-----
 
 ### Requirements
 1. Key.jsk: Created while signing app via android studio
@@ -58,6 +62,7 @@ Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Acti
 
 ![creating_secrets](https://user-images.githubusercontent.com/25560375/219327104-b202f012-ec3d-4da5-83ac-6059655c3f30.png)
 
+-----
 
 #### Creating service account.
 
@@ -113,6 +118,8 @@ Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Acti
 24. Enable api
 
 ![enable_api](https://user-images.githubusercontent.com/25560375/219343316-719e7d1c-1fe1-43c2-9740-92047806ea14.png)
+
+-----
 
 25. Got to google play console - > Setup - Api acess
 
