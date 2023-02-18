@@ -27,6 +27,9 @@ performs the following steps:
 
 In this sample project we use two workflows: one that build the and test the app whenever commits are pushed to any branc rather than master and one that uploads app to google play whenever commits are pushed or merged to master branch.
 
+### Workflow files Directory
+In the root folder of your projetc, Create a folder and name it ".github" and in it create a folder and name it "workflows". Add your .yml files (build.yml and deploy.ml) in the workflows folder.
+
 ### Note
 Before automating this process, App must be in production on google play, meaning the first publish to google play is done manually via the google play console.
 
@@ -246,4 +249,5 @@ Go to repository and click on actions on the menu.
 
 ![monitor_workflow](https://user-images.githubusercontent.com/25560375/219348214-f12ca81f-51e3-4701-974f-cfdb5ea2c4b7.png)
 
-
+### Note
+1. Remember to update version code before merging to master so as t avoid conflicts with the already published ABB on google play.
