@@ -250,4 +250,4 @@ Go to repository and click on actions on the menu.
 ![monitor_workflow](https://user-images.githubusercontent.com/25560375/219348214-f12ca81f-51e3-4701-974f-cfdb5ea2c4b7.png)
 
 ### Note
-1. Remember to update version code before merging to master so as t avoid conflicts with the already published ABB on google play.
+1. Always update the version code before merging to master so as to avoid conflicts with the already published ABB on google play.
