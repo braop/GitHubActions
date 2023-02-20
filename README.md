@@ -136,7 +136,7 @@ Go to github repository -> Settings -> Secrets and Variables (Left menu) -> Acti
 
 ![under_service_account](https://user-images.githubusercontent.com/25560375/219345570-699f64be-9b38-44e2-a423-00d82f02d6a6.png)
 
-27. Clear on manager service account and in Account permission add Admin(all permissions) and save changes
+27. Click on manager service account and in Account permission add Admin(all permissions) and save changes
 
 28. Under App permissions add apps that u want to be managed.
 
