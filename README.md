@@ -30,10 +30,10 @@ In this sample project we use two workflows:
 2. deploy.yml: Signs the app and uploads it to google play whenever commits are pushed or merged to master branch.
 
 ### Workflow files Directory
-In the root folder of your projetc, Create a folder and name it ".github" and in it create a folder and name it "workflows". Add your .yml files (build.yml and deploy.ml) in the workflows folder.
+In the root folder of your project, Create a folder and name it ".github" and in it create a folder and name it "workflows". Add your .yml files (build.yml and deploy.ml) in the workflows folder.
 
 ### Note
-Before automating this process, App must be in production on google play, meaning the first publish to google play store is done manually via the google play console.
+Before automating this process, The App must be in production on google play store, meaning the first publish to google play store is done manually via the google play console.
 
 -----
 
@@ -241,7 +241,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service_account.json
-          packageName: io.shopto.pride_handbook
+          packageName: com.example.GitHubActions
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
           track: production
 ```
@@ -251,5 +251,15 @@ Go to repository and click on actions on the menu.
 
 ![monitor_workflow](https://user-images.githubusercontent.com/25560375/219348214-f12ca81f-51e3-4701-974f-cfdb5ea2c4b7.png)
 
+### Pay attention to following to avoid errors
+1. Granting rights. 
+2. JDK version to use. 
+3. Track: Make sure the track your publishing your app to is avaialable on google play console.
+4. Lint check: if the lint check fails, the app fails to build. Ensure lint check is passed.
+
 ### Note
 1. Always update the version code before merging to master so as to avoid conflicts with the already published ABB on google play.
+
+
+## How to use Github Actions to Distribute development app via firebase.
+
