@@ -25,7 +25,9 @@ performs the following steps:
 
 -----
 
-In this sample project we use two workflows: one that builds and tests the app whenever commits are pushed to any branch rather than master and one that uploads app to google play whenever commits are pushed or merged to master branch.
+In this sample project we use two workflows: 
+1. build.yml: Builds and tests the app whenever commits are pushed to any branch except master branch.
+2. deploy.yml: Signs the app and uploads it to google play whenever commits are pushed or merged to master branch.
 
 ### Workflow files Directory
 In the root folder of your projetc, Create a folder and name it ".github" and in it create a folder and name it "workflows". Add your .yml files (build.yml and deploy.ml) in the workflows folder.
