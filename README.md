@@ -262,4 +262,45 @@ Go to repository and click on actions on the menu.
 
 
 ## How to use Github Actions to Distribute development app via firebase.
+1. distribute.yml: Builds and generates apk and distributes it to firebase app distribution.
 
+name: Build & upload to Firebase App Distribution
+```
+on:
+push:
+branches: [ dev_firebase ]
+
+jobs:
+build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+
+      - name: Grant rights
+        run: chmod +x gradlew
+
+      - name: build release
+        run: ./gradlew assembleRelease
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          #serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/release/app-release-unsigned.apk
+```
+
+2. Add create project on firebase and app and install firebase sdk to android as instructed
+3. Add secrets to github: FIREBASE_APP_ID and FIREBASE_TOKEN
+4. Add tester to firebase app distribution
