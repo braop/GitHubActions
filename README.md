@@ -308,7 +308,8 @@ build:
 ### Firebase Configuration
 1. Go to the Firebase console and create a project. 
 2. Complete the app’s firebase configuration. 
-3. Create an android app in firebase and copy the App ID in the firebase project settings. 
+3. Create an android app in firebase and copy the App ID in the firebase project settings.
+![app_id](https://user-images.githubusercontent.com/25560375/223026208-e9eb3670-8876-4ed7-a9d6-4f765e2b82e5.png)
 4. Install and configure the firebase on your machine. 
 5. Go to Release & Monitor > App Distribution > Accept the Terms of services and click Get Started. 
 6. Go to Testers & Groups and add a new group called testers. 
@@ -317,6 +318,5 @@ build:
 8. We will implement wzieba/Firebase-Distribution-Github-Action@v1 and supply the following GH secrets to publish the APK to the Firebase distribution app. 
 9. Generate the firebase token — https://firebase.google.com/docs/cli#cli-ci-systems and copy the token.
 ![firebase_token](https://user-images.githubusercontent.com/25560375/223025247-a35724ad-25d0-4897-a2b8-13f82481af08.png)
-10. App ID: This is used to create secretes on github.
-![app_id](https://user-images.githubusercontent.com/25560375/223026208-e9eb3670-8876-4ed7-a9d6-4f765e2b82e5.png)
+
 
