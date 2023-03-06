@@ -304,3 +304,14 @@ build:
 2. Add create project on firebase and app and install firebase sdk to android as instructed
 3. Add secrets to github: FIREBASE_APP_ID and FIREBASE_TOKEN
 4. Add tester to firebase app distribution
+
+### Firebase Configuration
+1. Go to the Firebase console and create a project. 
+2. Complete the app’s firebase configuration. 
+3. Create an android app in firebase and copy the App ID in the firebase project settings. 
+4. Install and configure the firebase on your machine. 
+5. Go to Release & Monitor > App Distribution > Accept the Terms of services and click Get Started. 
+6. Go to Testers & Groups and add a new group called testers. 
+7. Click the New link under Invite links, choose the testing group, and then click Create link. A fresh public link will be created to invite other testers. 
+8. We will implement wzieba/Firebase-Distribution-Github-Action@v1 and supply the following GH secrets to publish the APK to the Firebase distribution app. 
+9. Generate the firebase token — https://firebase.google.com/docs/cli#cli-ci-systems and copy the token.
