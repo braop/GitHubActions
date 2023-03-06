@@ -320,4 +320,7 @@ build:
 9. Generate the firebase token — https://firebase.google.com/docs/cli#cli-ci-systems and copy the token.
 ![firebase_token](https://user-images.githubusercontent.com/25560375/223025247-a35724ad-25d0-4897-a2b8-13f82481af08.png)
 
+##Note: 
+To create Firebase Serivce Account, follow the steps above(https://github.com/braop/GitHubActions#creating-service-account) but add the role as: Fire app distribution api as below:
 
+<img width="1024" alt="firebase_role" src="https://user-images.githubusercontent.com/25560375/223141618-49bf0f35-8150-48b1-ad98-25b131874216.png">
