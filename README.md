@@ -315,3 +315,12 @@ build:
 7. Click the New link under Invite links, choose the testing group, and then click Create link. A fresh public link will be created to invite other testers. 
 8. We will implement wzieba/Firebase-Distribution-Github-Action@v1 and supply the following GH secrets to publish the APK to the Firebase distribution app. 
 9. Generate the firebase token — https://firebase.google.com/docs/cli#cli-ci-systems and copy the token.
+
+Firebase Token
+![firebase_token](https://user-images.githubusercontent.com/25560375/223025247-a35724ad-25d0-4897-a2b8-13f82481af08.png)
+
+Firebase Tester Group
+![firebase_distribution](https://user-images.githubusercontent.com/25560375/223025676-a0abedae-80e5-4767-952a-23938a1a2040.png)
+
+App ID
+![app_id](https://user-images.githubusercontent.com/25560375/223026208-e9eb3670-8876-4ed7-a9d6-4f765e2b82e5.png)
