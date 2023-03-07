@@ -262,7 +262,7 @@ Go to repository and click on actions on the menu.
 
 
 ## How to use Github Actions to Distribute development app via firebase.
-1. distribute.yml: Builds and generates apk and distributes it to firebase app distribution.
+1. distribute.yml: This script: builds, generates apk and distributes it to firebase app distribution.
 
 ```
 name: Build & upload to Firebase App Distribution
@@ -302,7 +302,7 @@ build:
           file: app/build/outputs/apk/release/app-release-unsigned.apk
 ```
 
-2. Add create project on firebase and app and install firebase sdk to android as instructed
+2. Create project on firebase and app and install firebase sdk to android as instructed
 3. Add secrets to github: FIREBASE_APP_ID and FIREBASE_TOKEN
 4. Add tester to firebase app distribution
 
