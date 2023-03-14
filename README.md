@@ -360,12 +360,12 @@ android {
 
 - To build: ./gradlew assembleFlavorBuildType eg:
   
-  For Debug: ./gradlew assembleDevDebug or ./gradlew assembleFullDebug
+   For Debug: ./gradlew assembleDevDebug or ./gradlew assembleFullDebug
 
 3. File link:
 - To get apk link: app/build/outputs/apk/'flavor'/'buildType'/app-'flavor'-'buildType'.apk
 
-For Debug: app/build/outputs/apk/dev/debug/app-dev-debug.apk
+   For Debug: app/build/outputs/apk/dev/debug/app-dev-debug.apk
 
 4. The workflow below build apk as for dev-staging and distributes to firebase app distribution
 
