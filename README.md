@@ -324,3 +324,92 @@ build:
 To create Firebase Serivce Account, follow the steps above(https://github.com/braop/GitHubActions#creating-service-account) but add the role as: Fire app distribution api as below:
 
 <img width="1024" alt="firebase_role" src="https://user-images.githubusercontent.com/25560375/223141618-49bf0f35-8150-48b1-ad98-25b131874216.png">
+
+### Handling Build Type and Product Flavor
+1. In your project's build.gradle file, define the product flavors and build types you want to build APKs for. Eg.
+```
+android {
+  ...
+  flavorDimensions "version"
+  productFlavors {
+  
+    dev {
+      dimension "version"
+      ...
+    }
+    full {
+      dimension "version"
+      ...
+    }
+  }
+  
+  buildTypes {
+    debug {
+      ...
+    }
+    staging {
+      ...
+    }
+    release {
+      ...
+    }
+  }
+}
+```
+2. In your workflow script
+
+- To build: ./gradlew assembleFlavorBuildType eg:
+  
+  For Debug: ./gradlew assembleDevDebug or ./gradlew assembleFullDebug
+
+3. File link:
+- To get apk link: app/build/outputs/apk/'flavor'/'buildType'/app-'flavor'-'buildType'.apk
+
+For Debug: app/build/outputs/apk/dev/debug/app-dev-debug.apk
+
+4. The workflow below build apk as for dev-staging and distributes to firebase app distribution
+
+```
+name: Build & upload to Firebase App Distribution
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+
+      - name: Grant rights
+        run: chmod +x gradlew
+
+      - name: Build release
+        run: ./gradlew assembleDevStaging
+
+      #Debug
+      - name: Upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID_STAGING }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          #serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          #Debug
+          #file: app/build/outputs/apk/dev/debug/app-dev-debug.apk
+          #Staging
+          file: app/build/outputs/apk/dev/staging/app-dev-staging.apk
+          #Release
+          #file: app/build/outputs/apk/dev/release/app-dev-release-unsigned.apk
+```
