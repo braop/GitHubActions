@@ -1,3 +1,6 @@
+# Github Actions
+A perfect example of CI/CD: Automating Publishing Apps to Google Play Store.
+
 ## How to use Github Actions to publish AAB to Google Play Store.
 
 To use GitHub Actions to publish an app to the Google Play Store, you need to create a workflow that
